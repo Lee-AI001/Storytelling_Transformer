@@ -31,10 +31,20 @@ z-plan.yaml         # Planning file (spoilers maybe? 👀)
 
 ---
 
-## ⚠️ Note on Datasets
+## 👾 🚀 Versions
 
-This repo does not include any datasets directly to keep things light and clean.
-But you can easily plug your own in! Check the config.py for how paths are handled.
+- Lantern_v2 - 
+Basic Transformer setup,
+Runs without errors,
+Poor generation performance 
+
+- Lantern_v2.5 -
+Improved file structuring and modularization,
+Added performance measurement tools and clearer logging,
+No architectural/model upgrades
+
+- Lantern_v3 (In Progress) - 
+
 
 ---
 
