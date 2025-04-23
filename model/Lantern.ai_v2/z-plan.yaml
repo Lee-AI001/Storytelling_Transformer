@@ -1,0 +1,188 @@
+```yaml
+trials:
+
+  - name: Wider-Mid Pro
+    goal: Balanced performance, fits 128MB dataset, longer context
+    model_size: Medium
+    parameters: ~15M
+    architecture:
+      vocab_size: 20000
+      layers: 5
+      d_model: 256
+      nhead: 8
+      dropout: 0.2
+      dim_feedforward: 1024
+      max_len: 512
+    tokenization:
+      sliding_step: 128
+      max_chunks: 20
+    training:
+      batch_size: 24
+      epochs: 20
+      learning_rate: 0.0002
+      weight_decay: 0.05
+      patience: 8
+      warmup_epochs: 3
+      max_grad_norm: 1.0
+      use_lion: true
+      use_scheduler: true
+      scheduler_type: cosine
+      split_ratio: 0.9
+      save_dis: 5
+      test_size: 0.05
+    generation:
+      temperature: 0.85
+      top_k: 40
+      top_p: 0.92
+      pad_idx: 0
+      eos_idx: 3
+      max_gen_len: 256
+
+  - name: Wider-Long Pro
+    goal: Max performance, long context, stable on full dataset
+    model_size: Large
+    parameters: 9083744
+    architecture:
+      vocab_size: 20000
+      layers: 4
+      d_model: 192
+      nhead: 12
+      dropout: 0.25
+      dim_feedforward: 768
+      max_len: 512
+    tokenization:
+      sliding_step: 256
+      max_chunks: 18
+    training:
+      batch_size: 32
+      epochs: 18
+      learning_rate: 0.0001
+      weight_decay: 0.08
+      patience: 9
+      warmup_epochs: 4
+      max_grad_norm: 1.0
+      use_lion: true
+      use_scheduler: true
+      scheduler_type: cosine
+      split_ratio: 0.85
+      save_dis: 6
+      test_size: 0
+    generation:
+      temperature: 0.9
+      top_k: 50
+      top_p: 0.9
+      pad_idx: 0
+      eos_idx: 3
+      max_gen_len: 250
+
+    name: Mid-Long
+    goal: Balanced depth and width for robust generalization
+    model_size: Medium
+    parameters: 5625384
+    architecture:
+      vocab_size: 15000
+      layers: 5
+      d_model: 144
+      nhead: 6
+      dropout: 0.2
+      dim_feedforward: 576
+      max_len: 256
+    tokenization:
+      sliding_step: 128
+      max_chunks: 20
+    training:
+      batch_size: 64
+      epochs: 18
+      learning_rate: 0.000125
+      weight_decay: 0.04
+      patience: 9
+      warmup_epochs: 3
+      max_grad_norm: 1.0
+      use_lion: true
+      use_scheduler: true
+      scheduler_type: cosine
+      split_ratio: 0.85
+      save_dis: 6
+      test_size: 0
+    generation:
+      temperature: 0.9
+      top_k: 50
+      top_p: 0.9
+      pad_idx: 0
+      eos_idx: 3
+      max_gen_len: 250
+
+  - name: Mid_Wide
+    goal: Efficient, good for real-time inference
+    model_size: Medium
+    parameters: 6093080
+    architecture:
+      vocab_size: 15000
+      layers: 4
+      d_model: 160
+      nhead: 10
+      dropout: 0.2
+      dim_feedforward: 640
+      max_len: 448
+    tokenization:
+      sliding_step: 256
+      max_chunks: 28
+    training:
+      batch_size: 64
+      epochs: 18
+      learning_rate: 0.00016
+      weight_decay: 0.03
+      patience: 9
+      warmup_epochs: 3
+      max_grad_norm: 1.0
+      use_lion: true
+      use_scheduler: true
+      scheduler_type: cosine
+      split_ratio: 0.85
+      save_dis: 6
+      test_size: 0
+    generation:
+      temperature: 0.9
+      top_k: 50
+      top_p: 0.9
+      pad_idx: 0
+      eos_idx: 3
+      max_gen_len: 250
+
+  - name: Mid-Context Lite
+    goal: Compact, robust, fast generalizer
+    model_size: Small+
+    parameters: 3181200
+    architecture:
+      vocab_size: 10000
+      layers: 3
+      d_model: 128
+      nhead: 8
+      dropout: 0.125
+      dim_feedforward: 512
+      max_len: 256
+    tokenization:
+      sliding_step: 128
+      max_chunks: 20
+    training:
+      batch_size: 128
+      epochs: 18
+      learning_rate: 0.0002
+      weight_decay: 0.005
+      patience: 9
+      warmup_epochs: 2
+      max_grad_norm: 1.0
+      use_lion: true
+      use_scheduler: true
+      scheduler_type: cosine
+      split_ratio: 0.85
+      save_dis: 6
+      test_size: 0
+    generation:
+      temperature: 0.9
+      top_k: 50
+      top_p: 0.9
+      pad_idx: 0
+      eos_idx: 3
+      max_gen_len: 250
+```
