@@ -32,6 +32,7 @@ z-plan.yaml         # info file
 after v3: 
 
 daata_utils.py      # a separate file from orginal config to handle data process
+
 pretrain.py         # training for genres prediction 
 
 ---
