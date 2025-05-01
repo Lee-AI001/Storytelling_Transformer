@@ -1,0 +1,77 @@
+project:
+  name: Lantern.ai_flash
+  description: A transformer model for generating stories, with optional genre prediction and SimCSE pre-training.
+
+code_structure:
+  config:
+    description: Defines all the adjustable settings for the model, training process, and data handling. This includes model size, learning rates, and how the data is prepared.
+    key_areas:
+      - Model Architecture: Size of the model's layers and number of attention heads.
+      - Training Hyperparameters: Settings that control how the model learns (e.g., learning rate, dropout).
+      - Data Chunking Strategy: How long stories are split into smaller pieces for processing.
+      - Batching Configuration: How many data samples are processed at once, potentially adjusting based on available memory.
+      - Learning Rate Scheduling: How the learning rate changes over training.
+      - Optimization Settings: The algorithm used to update the model's weights.
+      - Generation Parameters: Settings that control how new stories are created (e.g., randomness).
+
+  pretrain:
+    description: Contains code for an initial training phase using a technique called SimCSE. This helps the model learn good representations of text before the main story generation training.
+    techniques_used:
+      - Contrastive Learning: Learning by comparing similar and different text.
+      - Embedding Projection: An extra layer to help the SimCSE process.
+    loss_function: Used to guide the learning process in SimCSE.
+
+  train:
+    description: The main script for training the story generation model. It uses the transformer architecture and incorporates various techniques to improve performance.
+    core_techniques:
+      - Transformer Model: The primary neural network architecture.
+      - Dynamic Batching: Automatically adjusting the number of stories processed together.
+      - Learning Rate Scheduler: Changing the learning rate during training.
+      - Regularization: Methods to prevent the model from memorizing the training data.
+    loss_functions: Measures how well the model is predicting the next words and (optionally) the genre.
+    evaluation_metrics: How the model's performance is measured during training.
+
+  model:
+    transformer:
+      description: Defines the core transformer model architecture.
+      key_components:
+        - Embedding Layers: Convert words into numerical representations.
+        - Decoder Layers: The main building blocks of the transformer.
+        - Attention Mechanism: Allows the model to focus on relevant parts of the input.
+        - Positional Encoding: Helps the model understand the order of words.
+        - Output Heads: Layers that predict the next word and (optionally) the genre.
+      attention_details:
+        - Multi-Head Attention: Multiple attention mechanisms working in parallel.
+        - Rotary Position Embeddings: A specific way of encoding word order.
+
+  dataset:
+    description: Handles loading, preparing, and organizing the story data for training.
+    data_preparation:
+      - Chunking: Splitting long stories into manageable segments.
+      - Dynamic Context: Gradually increasing the length of text the model sees during training.
+      - Tokenization: Converting text into numerical tokens.
+      - Genre Handling: Processing genre labels if used.
+
+  dataloader:
+    description: Responsible for feeding batches of processed data to the training script.
+    batch_creation:
+      - Collation: Preparing sequences for batching, including padding and attention masks.
+
+  tokenizer_utils:
+    description: Contains tools for working with the tokenizer, which converts text to numbers and back.
+    tokenizer_engine: SentencePiece (the specific tokenization method used).
+    functionality: Loading pre-trained tokenizers or training a new one.
+
+  generate:
+    description: Scripts for creating new stories and predicting genres using the trained model.
+    story_generation:
+      - Sampling Strategies: Methods for choosing the next word during generation (e.g., top-k, top-p).
+    genre_prediction: Predicting the genre of a given text.
+
+  pulling:
+    description: Likely a script to load a trained model and use it for tasks like generating stories or evaluating performance outside the main training loop.
+
+  evaluation:
+    description: Contains scripts or functions for formally evaluating the performance of the trained model using specific metrics.
+    metrics_used:
+      - ROUGE: A common metric for evaluating text generation quality.
