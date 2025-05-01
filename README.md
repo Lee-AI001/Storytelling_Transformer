@@ -14,8 +14,8 @@ You're looking at version **v2.5**, and it's still growing, so feel free to expl
 
 - 💡 A transformer model trained for narrative generation  
 - 📦 Pretrained model + tokenizer (already saved in `storage/`)  
-- 🧠 Modular files: easy to understand and extend  
-- ✨ Plug-and-play `pulling.py` to load any model version you like!
+- 🧠 Modular files: easy to understand and extend
+-  :( unable to share the dataset cause size limit in github 
 
 ---
 
@@ -28,6 +28,11 @@ config.py           # All hyperparams and paths
 train.py            # Training pipeline  
 pulling.py          # Load models and generate text  
 z-plan.yaml         # info file 
+
+after v3: 
+
+daata_utils.py      # a separate file from orginal config to handle data process
+pretrain.py         # training for genres prediction 
 
 ---
 
@@ -43,13 +48,13 @@ Improved file structuring and modularization,
 Added performance measurement tools and clearer logging,
 No architectural/model upgrades
 
-- Lantern_v3
+- Lantern_v3 - 
 Implement regularization and normalization techniques such as embedding dropout, label smoothing, curriculum learning, and SGDR scheduling. Also, include an optional genre prediction feature (can be set to True or False).
 
-- Lantern_v4
+- Lantern_v4 - 
 Enhanced version with bug fixes. Add support for mixed precision training (bfloat16) and gradient accumulation steps to accelerate training.
 
-- Lantern_v5
+- Lantern_v5 - 
 Upgrade the user interface. Introduce an option for Multi-Head Latent Attention. Remove R-Drop and curriculum learning. Add pretraining epochs for genre classification and allow tuning of ROUGE test sample size.
 
 
